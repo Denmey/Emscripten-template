@@ -1,4 +1,4 @@
-This template sets up a project for compiling C++ OpenGL code to the WebGL JS code using Emscripten that could be run on browsers.
+This template sets up a project for compiling C++ OpenGL code to the WebGL JS code that could be run on browsers using Emscripten.
 
 For project to work properly, install:
 1) Emscripten from https://emscripten.org/docs/getting_started/downloads.html;
