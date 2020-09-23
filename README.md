@@ -1,10 +1,9 @@
-This template sets up compiling C++ OpenGL code to the WebGL JS code using Emscripten that could be run on browsers.
+This template sets up a project for compiling C++ OpenGL code to the WebGL JS code that could be run on browsers using Emscripten.
 
 For project to work properly, install:
 1) Emscripten from https://emscripten.org/docs/getting_started/downloads.html;
 2) Conan package manager https://conan.io/;
 3) Download GLES2 includes from https://www.khronos.org/registry/OpenGL/index_es.php and put them in your compiler's includes directory;
-4) Download conan.cmake from https://github.com/conan-io/cmake-conan and put it in cmake directory of a project.
 
 Compile instructions:
 
