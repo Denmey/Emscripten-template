@@ -99,7 +99,6 @@ Application::~Application()
 
 void Application::main_loop()
 {
-	std::cout << "In main loop\n";
 	currentTime = glfwGetTime();
 	dTime = lastTime - currentTime;
 	lastTime = currentTime;

@@ -1,5 +1,5 @@
 #pragma once
-
+#include<iostream>
 #include "glad/glad.h"
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -18,6 +18,7 @@ private:
 	virtual void End() = 0;
 	GLFWwindow *window = nullptr;
 	Application(const Application &app);
+    Application& operator=(Application&);
 	float currentTime, lastTime, dTime;
 	void main_loop();
 };
