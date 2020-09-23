@@ -9,15 +9,15 @@
 class Application
 {
 public:
-    Application();
-    void Run();
-    ~Application();
+	void Run();
+	Application();
+	~Application();
 private:
-    virtual void Start() = 0;
-    virtual void Update(float dTime) = 0;
-    virtual void End() = 0;
-    GLFWwindow *window = nullptr;
-    Application(const Application &app);
-    float currentTime, lastTime, dTime;
-    void main_loop();
+	virtual void Start() = 0;
+	virtual void Update(float dTime) = 0;
+	virtual void End() = 0;
+	GLFWwindow *window = nullptr;
+	Application(const Application &app);
+	float currentTime, lastTime, dTime;
+	void main_loop();
 };
