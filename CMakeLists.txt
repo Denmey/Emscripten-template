@@ -49,6 +49,8 @@ conan_cmake_run(REQUIRES entt/3.3.2
 
 FILE(GLOB sources 
   # "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/source/Application.cpp"
+  # "${CMAKE_CURRENT_SOURCE_DIR}/source/Shader.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/source/emsc.cpp"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/extern/GLAD/glad/glad.c"

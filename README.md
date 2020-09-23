@@ -8,7 +8,9 @@ For project to work properly, install:
 
 Compile instructions:
 
-1. Create subdirectory in your project, i.e. build
+0. For Ubuntu you have to run `source ./emsdk_env.sh ` in your command prompt from the emsdk directory.
+
+1. Create subdirectory in your project, i.e. build, and enter into it.
 
 2.1. For compiling with emscripten, call ``emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug`` and then ``emmake make``.
 
