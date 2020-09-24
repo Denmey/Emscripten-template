@@ -134,8 +134,8 @@ class App : public Application {
 
 		if (ImGui::Begin("Window")) {
 			ImGui::SliderFloat("Scale", &scale, 0.1f, 5.0f);
-			ImGui::End();
 		}
+		ImGui::End();
 
 		ImGui::ShowDemoWindow();
 
