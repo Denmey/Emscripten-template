@@ -1,6 +1,8 @@
 // Based on https://gist.github.com/ousttrue/0f3a11d5d28e365b129fe08f18f4e141
 
 #include "Application.hpp"
+#include "Shader.hpp"
+
 
 #include "imgui.h"
 
@@ -71,6 +73,9 @@ class App : public Application {
 
 
 	void Start() override {
+		Shader("resources/shaders/test.vs", "");
+		Shader("resources/shaders/test2.vs", "");
+		Shader("resources/shaders/test3.vs", "");
 		glClearColor(1.0, 0.87, 0.83, 1.0);
 		// glUniform1i(0, 0);
 
