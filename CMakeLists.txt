@@ -88,9 +88,21 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
   # Definitions for imgui
   target_compile_definitions(${PROJECT_NAME} PRIVATE IMGUI_IMPL_OPENGL_ES3)
   target_compile_definitions(${PROJECT_NAME} PRIVATE IMGUI_DISABLE_FILE_FUNCTIONS)
+
+  # Packaging resources
+  target_link_options(${PROJECT_NAME} PRIVATE --preload-file ${CMAKE_CURRENT_SOURCE_DIR}/resources@resources)
 else()
   # Compile definition to use in hard-coded shaders
   # target_compile_definitions(${PROJECT_NAME} PRIVATE GLSL_VERSION=130)
+  # Copy resources to binary's location
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E echo "Copying resources"
+  )
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/resources
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>/../resources
+  )
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
