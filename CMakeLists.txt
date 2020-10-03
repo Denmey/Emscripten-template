@@ -105,7 +105,7 @@ else()
   )
 endif()
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+target_compile_definitions(${PROJECT_NAME} PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD PROJECT_NAME="${PROJECT_NAME}")
 
 
 # message(STATUS ${CMAKE_BINARY_DIR})

@@ -52,7 +52,7 @@ Application::Application()
 
 	glfwWindowHint(GLFW_RESIZABLE, true);
 
-	window = glfwCreateWindow(800, 600, "Basic app", nullptr, nullptr);
+	window = glfwCreateWindow(800, 600, PROJECT_NAME, nullptr, nullptr);
 	if (window == NULL)
 	{
 		// std::cerr << "Failed to create window\n";
