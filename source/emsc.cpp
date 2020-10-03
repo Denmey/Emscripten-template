@@ -18,47 +18,12 @@
 #include <algorithm>
 #include <iostream>
 
-
-const char *vertexShaderSource =
-#ifdef __EMSCRIPTEN__
-	"#version 300 es\n"
-	"precision mediump float;\n"
-#else
-	"#version 330 core\n"
-#endif
-	"layout (location = 0) in vec2 vPos;\n"
-	"layout (location = 1) in vec3 vColor;\n"
-
-	"out vec3 fColor;\n"
-
-	"void main()\n"
-	"{\n"
-	"   gl_Position = vec4(vPos.x, vPos.y, 0.0f, 1.0f);\n"
-	"   fColor = vColor;\n"
-	"}\0";
-const char *fragmentShaderSource =
-#ifdef __EMSCRIPTEN__
-	"#version 300 es\n"
-	"precision mediump float;\n"
-#else
-	"#version 330 core\n"
-#endif
-	"in vec3 fColor;\n"
-
-	"out vec4 FragColor;\n"
-
-	"void main()\n"
-	"{\n"
-	"   FragColor = vec4(fColor, 1.0f);\n"
-	"}\n\0";
-
 struct Vertex
 {
 	glm::vec2 Pos;
 	glm::vec3 Color;
 	// glm::vec2 Tex;
 };
-
 
 class App : public Application {
 
@@ -68,14 +33,11 @@ class App : public Application {
 		Vertex{{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
 	};
 	GLuint VAO = 0, VBO = 0;
-	GLuint shaderProgram = 0;
+	Shader basicShader{"resources/shaders/basic.vs", "resources/shaders/basic.fs"};
 	float scale = 1.0f;
 
 
 	void Start() override {
-		Shader("resources/shaders/test.vs", "");
-		Shader("resources/shaders/test2.vs", "");
-		Shader("resources/shaders/test3.vs", "");
 		glClearColor(1.0, 0.87, 0.83, 1.0);
 		// glUniform1i(0, 0);
 
@@ -91,47 +53,6 @@ class App : public Application {
 		glEnableVertexAttribArray(1);
 
 		glBindVertexArray(0);
-
-		int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-		glCompileShader(vertexShader);
-		// check for shader compile errors
-		int success;
-		char infoLog[512];
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-			std::cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
-			          << infoLog << std::endl;
-		}
-		// fragment shader
-		int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-		glCompileShader(fragmentShader);
-		// check for shader compile errors
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-			std::cerr << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
-			          << infoLog << std::endl;
-		}
-		// link shaders
-		shaderProgram = glCreateProgram();
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		glLinkProgram(shaderProgram);
-		// check for linking errors
-		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-			std::cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
-			          << infoLog << std::endl;
-		}
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
 	}
 
 	void Update(float dTime) override {
@@ -153,7 +74,7 @@ class App : public Application {
 			++idx;
 		});
 
-		glUseProgram(shaderProgram);
+		basicShader.use();
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices.data(), GL_DYNAMIC_DRAW);
