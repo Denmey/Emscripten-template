@@ -19,6 +19,4 @@ TODO List:
 
 * Add external resources support: textures, external shaders, model object files.
 
-* Implement shader class that puts correct version of GLSL based on compiler used.
-
 * Continuous integration?
